@@ -1,0 +1,11 @@
+[package]
+name = "blinky"
+version = "0.1.0"
+authors = ["Your Name <your.email@example.com>"]
+edition = "2018"
+
+[dependencies]
+panic-halt = "0.2.0"
+
+[build-dependencies]
+cc = "1.0"

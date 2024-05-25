@@ -1,0 +1,13 @@
+[build]
+target = "aarch64-unknown-none"
+
+[target.aarch64-unknown-none]
+linker = "ld.lld"
+rustflags = [
+    "-C",
+    "link-arg=-Tlayout.ld",
+    "-C",
+    "link-arg=--no-undefined",
+    "-C",
+    "link-arg=--gc-sections",
+]
