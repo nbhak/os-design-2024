@@ -119,7 +119,7 @@ fn pop() {
         assert_eq!(stack_vec.len(), i + 1);
     }
 
-    for i in 1023..=0 {
+    for i in (0..1024).rev() {
         assert_eq!(stack_vec.len(), i + 1);
         assert_eq!(stack_vec.pop(), Some(i));
         assert_eq!(stack_vec.len(), i);
@@ -177,9 +177,14 @@ fn iterator() {
         i += 1;
     }
 
+    let mut storage = [0usize; 1024];
+    let mut stack_vec = StackVec::new(&mut storage);
+    for i in 0..1024 {
+        stack_vec.push(i * i).expect("cap = 1024");
+    }
     let mut i = 0;
     for val in stack_vec {
-        assert_eq!(*val, i * i);
+        assert_eq!(val, i * i);
         i += 1;
     }
 }
@@ -213,10 +218,10 @@ fn errors() {
     for i in 0..1024 {
         assert_eq!(vec.push(i), Err(()));
     }
-    for i in 1023..=0 {
+    for i in (0..1024).rev() {
         assert_eq!(vec.pop(), Some(i));
     }
-    for _ in 1023..=0 {
+    for _ in 0..1024 {
         assert_eq!(vec.pop(), None);
     }
 }
